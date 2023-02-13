@@ -1,4 +1,5 @@
 import { surpriseMePrompts } from '../constants';
+import FileSaver from 'file-saver';
 
 //excepts prompt as parameter
 export function getRandomPrompt(prompt) {

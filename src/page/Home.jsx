@@ -19,47 +19,48 @@ const Home = () => {
   const [allPosts, setAllPosts] = useState(null);
 
   const [searchText, setSearchText] = useState('');
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState(null);
 
-useEffect(() => {
-  const fetchPosts = async () => { 
+  const fetchPosts = async () => {
     setLoading(true);
 
-  try {
-    const response = await fetch('http://localhost:8080/api/v1/post', {
+    try {
+      const response = await fetch('http://localhost:8080/api/v1/post', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
         },
       });
 
-if (response.ok) {
+      if (response.ok) {
         const result = await response.json();
         setAllPosts(result.data.reverse());
-  }
-} catch (err) {
-  alert(err);
+      }
+    } catch (err) {
+      alert(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  } finally {
-    setLoading(false);
-  }
-}
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-  fetchPosts();
-}, []);
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
 
-const handleSearchChange = (e) => {
-  clearTimeout(searchTimeout);
-  setSearchText(e.target.value);
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
+        setSearchedResults(searchResult);
+      }, 500),
+    );
+  };
 
-  setSearchTimeout(
-    setTimeout(() => {
-      const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
-      setSearchedResults(searchResult);
-    }, 500),
-  );
-};
- 
- return (
+  return (
     <section className="max-w-7xl mx-auto">
       <div>
         <h1 className="font-extrabold text-[#222328] text-[32px]">The Community Showcase</h1>
@@ -92,7 +93,7 @@ const handleSearchChange = (e) => {
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1 gap-3">
               {searchText ? (
                 <RenderCards
-                  data={[]}
+                  data={searchedResults}
                   title="No Search Results Found"
                 />
               ) : (

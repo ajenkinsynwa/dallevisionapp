@@ -3,18 +3,26 @@ import { useNavigate } from 'react-router-dom';
 
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
-import { FormField, Loader } from '../components '
+import { FormField, Loader } from '../components ';
 
 const CreatePost = () => {
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
     name: '',
     prompt: '',
     photo: '',
   });
 
-  const [generatingImg, setGeneratingImg] = useState(false); //makes contact with api 
+  const [generatingImg, setGeneratingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+
+  const handleSurpriseMe = () => {
+    const randomPrompt = getRandomPrompt(form.prompt);
+    setForm({ ...form, prompt: randomPrompt });
+  };
 
   const generateImage = async () => {
     if (form.prompt) {
@@ -29,6 +37,7 @@ const CreatePost = () => {
             prompt: form.prompt,
           }),
         });
+
         const data = await response.json();
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (err) {
@@ -39,14 +48,6 @@ const CreatePost = () => {
     } else {
       alert('Please provide proper prompt');
     }
-  };
-  
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-
-  const handleSurpriseMe = () => {
-    const randomPrompt = getRandomPrompt(form.prompt);
-    setForm({ ...form, prompt: randomPrompt });
   };
 
   const handleSubmit = async (e) => {
@@ -76,8 +77,6 @@ const CreatePost = () => {
     }
   };
 
-
-
   return (
     <section className="max-w-7xl mx-auto">
       <div>
@@ -96,7 +95,7 @@ const CreatePost = () => {
             handleChange={handleChange}
           />
 
-            <FormField
+          <FormField
             labelName="Prompt"
             type="text"
             name="prompt"
@@ -106,6 +105,7 @@ const CreatePost = () => {
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
           />
+
           <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center">
             { form.photo ? (
               <img
@@ -127,9 +127,9 @@ const CreatePost = () => {
               </div>
             )}
           </div>
-    
-          </div>
-          <div className="mt-5 flex gap-5">
+        </div>
+
+        <div className="mt-5 flex gap-5">
           <button
             type="button"
             onClick={generateImage}
@@ -151,6 +151,6 @@ const CreatePost = () => {
       </form>
     </section>
   );
-};        
+};
 
 export default CreatePost;
