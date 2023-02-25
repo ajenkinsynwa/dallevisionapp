@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import { background } from '../assets';
+// import { space } from '../assets';
+import { astro } from '../assets';
 import { preview } from '../assets';
 import { getRandomPrompt } from '../utils';
 import { FormField, Loader } from '../components ';
@@ -78,15 +80,18 @@ const CreatePost = () => {
   };
 
   return (
-    <body className="bg-slate-300">
+    <body className="bg-[url('src/assets/space1.jpg')] bg-cover">
+    
+
     <section className="max-w-7xl mx-auto">
+    <img class='flex ' src={astro} alt/>
       <div>
-        <h1 className="font-extrabold text-[#222328] text-[32px]">Create</h1>
-        <p className="mt-2 text-[#666e75] text-[14px] max-w-[500px]">Generate an imaginative image through DALL-E AI and share it with the community</p>
+        <h1 className="font-extrabold text-[#ecfeff] text-[32px]">Create</h1>
+        <p className="mt-2 text-[#ecfeff] text-[16px] max-w-[500px]">Generate an imaginative image through DALL-E AI and share it with the community</p>
       </div>
 
-      <form className="mt-16 max-w-3xl" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-5" >
+      <form className="mt-16 max-w-3xl " onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-5 " >
           <FormField
             labelName="Your Name"
             type="text"
@@ -106,6 +111,7 @@ const CreatePost = () => {
             isSurpriseMe
             handleSurpriseMe={handleSurpriseMe}
           />
+
 
           <div className="relative bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 w-64 p-3 h-64 flex justify-center items-center ">
             { form.photo ? (
@@ -141,7 +147,7 @@ const CreatePost = () => {
         </div>
 
         <div className="mt-10">
-          <p className="mt-2 text-[#666e75] text-[14px]">** Once you have created the image you want, you can share it with others in the community **</p>
+          <p className="mt-2 text-[#ecfeff] text-[16px]">|| Once you have created the image you want, you can share it with others in the community ||</p>
           <button
             type="submit"
             className="mt-3 text-white bg-[#6469ff] font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center bg-sky-500/100"
