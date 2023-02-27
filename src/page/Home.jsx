@@ -67,10 +67,10 @@ const Home = () => {
       </div>
 
   
-
+   
       <div className="mt-16">
         <FormField
-          labelName="Search posts"
+          labelName="Search Posts"
           type="text"
           name="text"
           placeholder="Search something..."
