@@ -79,8 +79,8 @@ const CreatePost = () => {
     }
   };
 
-  return (
-    <body className="bg-[url('src/assets/space1.jpg')] bg-cover">
+   return (
+     className="bg-[url('src/assets/space1.jpg')] bg-cover">
 
     <section className="max-w-7xl mx-auto ">
     <img class='flex' src={astro} alt/>
@@ -156,7 +156,7 @@ const CreatePost = () => {
         </div>
       </form>
     </section>
-    </body>
+    
   );
 };
 
