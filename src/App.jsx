@@ -4,7 +4,9 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Home, CreatePost } from '../src/page';
 
 
-const App = () => (
+const App = () => {
+  return (
+
   <BrowserRouter>
     <header className="w-full flex justify-between items-center bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] bg-gradient-to-r from-cyan-500 to-blue-500">
       <Link to="/">
@@ -22,5 +24,5 @@ const App = () => (
   </BrowserRouter>
   
 );
-
+  }
 export default App;
