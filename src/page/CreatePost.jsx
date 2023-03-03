@@ -80,9 +80,9 @@ const CreatePost = () => {
   };
 
    return (
-    <body className='body'>
+    
 
-    <section className="max-w-7xl mx-auto ">
+    <section className="max-w-7xl mx-auto bg-cyan-600 ">
     <img class='flex' src={astro} alt/>
       <div>
         <h1 className="font-extrabold text-[#ecfeff] text-[32px]">Create</h1>
@@ -156,7 +156,7 @@ const CreatePost = () => {
         </div>
       </form>
     </section>
-    </body>
+
   );
 };
 
