@@ -6,7 +6,7 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
+.body {
     background-image: url('../assets/space1.jpg');
     background-size: cover;
   }
