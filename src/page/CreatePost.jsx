@@ -79,16 +79,16 @@ const CreatePost = () => {
     }
   };
 
-  return (
-    <section className="bg-[url('src/assets/space1.jpg')] bg-cover">
+   return (
+    <body className='body'>
 
-     <div className="max-w-7xl mx-auto ">
+    <section className="max-w-7xl mx-auto ">
     <img class='flex' src={astro} alt/>
       <div>
         <h1 className="font-extrabold text-[#ecfeff] text-[32px]">Create</h1>
         <p className="mt-2 text-[#ecfeff] text-[16px] max-w-[500px]">Generate an imaginative image through DALL-E AI and share it with the community</p>
       </div>
-​</div>
+​
       <form className="mt-16 max-w-3xl " onSubmit={handleSubmit}>
         <div className="flex flex-col gap-5 " >
           <FormField
@@ -154,9 +154,9 @@ const CreatePost = () => {
             {loading ? 'Sharing...' : 'Share with the Community'}
           </button>
         </div>
-   
       </form>
     </section>
+    </body>
   );
 };
 
