@@ -5,10 +5,7 @@
   text-align: center;
 }
 
-.body {
-    background-image: url('../src/assets/space1.jpg');
-    background-size: cover;
-  }
+
 
 .logo {
   height: 6em;
