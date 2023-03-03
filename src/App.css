@@ -5,7 +5,7 @@
   text-align: center;
 }
 
-body {
+.body {
     background-image: url('../assets/space1.jpg');
     background-size: cover;
   }
