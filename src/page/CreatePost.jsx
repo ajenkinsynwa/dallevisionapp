@@ -82,7 +82,7 @@ const CreatePost = () => {
    return (
     
 
-    <section className="max-w-7xl mx-auto bg-cyan-600 p-2 ">
+    <section className="max-w-7xl mx-auto bg-cyan-600 py-8">
     <img class='flex' src={astro} alt/>
       <div>
         <h1 className="font-extrabold text-[#ecfeff] text-[32px]">Create</h1>
