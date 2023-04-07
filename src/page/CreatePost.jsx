@@ -1,35 +1,47 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { background } from '../assets';
-// import { space } from '../assets';
+
+// Importing image assets
 import { astro } from '../assets';
 import { preview } from '../assets';
+
+// Importing utility functions and components
 import { getRandomPrompt } from '../utils';
-import { FormField, Loader } from '../components ';
+import { FormField, Loader } from '../components';
 
+// Component for creating a new post
 const CreatePost = () => {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigating to a different page
 
+  // State for form data
   const [form, setForm] = useState({
     name: '',
     prompt: '',
     photo: '',
   });
 
+  // State for generating image
   const [generatingImg, setGeneratingImg] = useState(false);
+
+  // State for loading
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
+  // Function to handle form input changes
+  const handleChange = (e) =>
+    setForm({ ...form, [e.target.name]: e.target.value });
 
+  // Function to generate a random prompt
   const handleSurpriseMe = () => {
     const randomPrompt = getRandomPrompt(form.prompt);
     setForm({ ...form, prompt: randomPrompt });
   };
 
+  // Function to generate an image based on the prompt
   const generateImage = async () => {
     if (form.prompt) {
       try {
         setGeneratingImg(true);
+        // Send a request to the backend API to generate an image
         const response = await fetch('https://imagigen.onrender.com/api/v1/dalle', {
           method: 'POST',
           headers: {
@@ -40,6 +52,7 @@ const CreatePost = () => {
           }),
         });
 
+        // Extract the generated image from the response
         const data = await response.json();
         setForm({ ...form, photo: `data:image/jpeg;base64,${data.photo}` });
       } catch (err) {
@@ -52,12 +65,15 @@ const CreatePost = () => {
     }
   };
 
+  // Function to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Check if form fields are valid
     if (form.prompt && form.photo) {
       setLoading(true);
       try {
+        // Send a request to the backend API to create a new post
         const response = await fetch('https://imagigen.onrender.com/api/v1/post', {
           method: 'POST',
           headers: {
@@ -66,6 +82,7 @@ const CreatePost = () => {
           body: JSON.stringify({ ...form }),
         });
 
+        // Show a success message and navigate to home page
         await response.json();
         alert('Success');
         navigate('/');
@@ -79,8 +96,6 @@ const CreatePost = () => {
     }
   };
 
-   return (
-    
 
     <section className="max-w-7xl mx-auto bg-cyan-600 py-8">
     <img class='flex' src={astro} alt/>
