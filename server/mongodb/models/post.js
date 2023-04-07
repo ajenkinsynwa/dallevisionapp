@@ -1,3 +1,4 @@
+//This is a JavaScript code that defines a mongoose schema for a "Post" object, which will be used to interact with a MongoDB database.
 import mongoose from 'mongoose';
 
 const Post = new mongoose.Schema({
