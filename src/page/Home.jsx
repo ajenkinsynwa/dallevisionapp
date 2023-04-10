@@ -1,26 +1,16 @@
-import React, { useEffect, useState } from 'react';
+mport React, { useEffect, useState } from 'react';
 import { Card, FormField, Loader } from '../components ';
 
-const RenderCards = ({ data, title }) => {
-  if (data?.length > 0) {
-    return (
-      data.map((post) => <Card key={post._id} {...post} />)
-    );
-  }
-
-  return (
-    <h2 className="mt-5 font-bold text-[#6469ff] text-xl uppercase">{title}</h2>
-  );
-};
-
+// This is a functional component that will be displayed on the home page
 const Home = () => {
-  const [loading, setLoading] = useState(false);
-  const [allPosts, setAllPosts] = useState(null);
+  // Here, we declare state variables that we will use to manage the component's state
+  const [loading, setLoading] = useState(false); // loading indicates whether data is being fetched
+  const [allPosts, setAllPosts] = useState(null); // allPosts contains all post objects fetched from the API
+  const [searchText, setSearchText] = useState(''); // searchText contains the text entered into the search input field
+  const [searchTimeout, setSearchTimeout] = useState(null); // searchTimeout is a timer that waits for the user to finish typing before initiating a search
+  const [searchedResults, setSearchedResults] = useState(null); // searchedResults contains search results filtered based on the text entered into the search input field
 
-  const [searchText, setSearchText] = useState('');
-  const [searchTimeout, setSearchTimeout] = useState(null);
-  const [searchedResults, setSearchedResults] = useState(null);
-
+  // This function fetches all post objects from the Imagigen API and updates the allPosts state variable
   const fetchPosts = async () => {
     setLoading(true);
 
