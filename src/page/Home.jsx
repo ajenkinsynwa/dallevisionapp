@@ -33,14 +33,17 @@ const Home = () => {
     }
   };
 
+ // This hook is called when the component mounts, and it fetches all post objects from the API
   useEffect(() => {
     fetchPosts();
   }, []);
 
+  // This function is called whenever the user types into the search input field
   const handleSearchChange = (e) => {
     clearTimeout(searchTimeout);
     setSearchText(e.target.value);
 
+    // After a 500 millisecond delay, this function filters allPosts based on the text entered into the search input field and updates searchedResults
     setSearchTimeout(
       setTimeout(() => {
         const searchResult = allPosts.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase()) || item.prompt.toLowerCase().includes(searchText.toLowerCase()));
